@@ -7,6 +7,7 @@ import com.reptithcm.edu.kiemtrahackathon.exception.ErrorCode;
 import com.reptithcm.edu.kiemtrahackathon.service.GamingGearService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -50,4 +51,13 @@ public class GamingGearController {
 
         return ResponseEntity.ok(gamingGearService.deleteGamingGear(id));
     }
+
+    @GetMapping
+    public ResponseEntity<Page<GamingGear>> getWithKeyword(@RequestParam(value = "keyword", required = false) String keyword,
+                                                           @RequestParam(value = "size", defaultValue = "1", required = false) int size,
+                                                           @RequestParam(value = "page", defaultValue = "10", required = false) int page){
+        return ResponseEntity.ok(gamingGearService.getWithKeyword(keyword, size, page));
+    }
+
+
 }

@@ -6,6 +6,9 @@ import com.reptithcm.edu.kiemtrahackathon.exception.AppException;
 import com.reptithcm.edu.kiemtrahackathon.exception.ErrorCode;
 import com.reptithcm.edu.kiemtrahackathon.repository.GamingGearRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -74,5 +77,9 @@ public class GamingGearService {
         gamingGear.setDeleted(true);
         gamingGearRepository.save(gamingGear);
         return true;
+    }
+
+    public Page<GamingGear> getWithKeyword(String keyword, int page, int size){
+        return gamingGearRepository.findByProductName(keyword, PageRequest.of(page, size));
     }
 }

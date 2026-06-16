@@ -18,8 +18,6 @@ public class GlobalExceptionHandling {
         return new ResponseEntity<>(appException.getErrorCode(), HttpStatus.valueOf(appException.getErrorCode().getCode()));
     }
 
-
-
     @ExceptionHandler(Exception.class)
     public void exceptionHandler(Exception e){
         log.error("Exception handling log: {}", e.getMessage() );
